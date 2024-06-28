@@ -7,6 +7,12 @@
 <title>Home Page</title>
 </head>
 <body>
+<div>
+   <%-- @directive tags better for static pages , includes resource at translation time --%>
+       <%@include file="header.jsp" %>
+   
+   </div>
+
       <h3>Welcome To Home Page</h3>
       <a href="signup">SignUp</a>
 </body>
