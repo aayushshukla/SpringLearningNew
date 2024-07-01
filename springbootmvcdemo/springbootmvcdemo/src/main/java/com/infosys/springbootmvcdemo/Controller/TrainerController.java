@@ -1,10 +1,14 @@
 package com.infosys.springbootmvcdemo.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -60,6 +64,37 @@ public class TrainerController {
 		 ModelAndView mv = new ModelAndView("/SignUp");
 		 mv.addObject("message", "SignUp Successfull");
 		 return mv;
+	}
+	
+	@RequestMapping("/login")
+	public ModelAndView loginPage()
+	{
+		
+	   List<Trainer>	 tlist =trainerServiceImplementation.showAllTrainers();
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("/TrainerDetails");
+		mv.addObject("trainerList",tlist);
+		return mv;
+	}
+	
+	@GetMapping("/deleteTrainer")
+	//@RequestMapping(value="/deleteTrainer",method = RequestMethod.GET)
+	// Annotation which indicates that a method parameter should be bound to a webrequest parameter. 
+	public ModelAndView deleteTrainer(@RequestParam int trainerid)
+	{
+	  String msg =	trainerServiceImplementation.removeTrainer(trainerid);
+	  ModelAndView mv = new ModelAndView();
+	  if(msg!=null)
+	  {
+		  List<Trainer>	 tlist =trainerServiceImplementation.showAllTrainers();
+		  mv.setViewName("/TrainerDetails");
+		  mv.addObject("trainerList",tlist);
+	  }
+	  else
+	  {
+		  mv.setViewName("/Delete");
+	  }
+	 return mv;
 	}
 	 
 }
