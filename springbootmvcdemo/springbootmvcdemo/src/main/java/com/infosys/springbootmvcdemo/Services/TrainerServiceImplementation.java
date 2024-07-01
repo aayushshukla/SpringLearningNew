@@ -2,6 +2,8 @@ package com.infosys.springbootmvcdemo.Services;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
@@ -48,5 +50,22 @@ public class TrainerServiceImplementation implements TrainerService {
 		   msg="Trainer removed";
 	   }
 		return msg;
+	}
+
+	@Override
+	public void updateTrainerData(Trainer newTrainer) {
+		// TODO Auto-generated method stub
+	   Trainer oldTrainer=  trainerRepo.findById(newTrainer.getTrainerId()).get();
+	   oldTrainer.setTrainerEmail(newTrainer.getTrainerEmail());
+	   oldTrainer.setTrainerPassword(newTrainer.getTrainerPassword());
+	   oldTrainer.setExp(newTrainer.getExp());
+	   trainerRepo.save(oldTrainer);
+	   //  org.slf4j.LoggerFactory;
+	   Logger  logger =  LoggerFactory.getLogger(TrainerServiceImplementation.class);
+	   logger.trace("Update done successfully");
+	   // different log level trace , info , error , debug 
+	   // default log displayed will be info or above info level
+	   
+	   
 	}
 }

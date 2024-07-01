@@ -97,4 +97,16 @@ public class TrainerController {
 	 return mv;
 	}
 	 
+	@GetMapping("/updateFormPage")
+	public ModelAndView updatePage(@RequestParam  int trainerid )
+	{
+		ModelAndView mv = new ModelAndView("/UpdateForm");
+		mv.addObject("tid", trainerid);
+		return mv;
+	}
+	@PostMapping("/updateInfo")
+	public void updateTrainerInfo(Trainer trainer)
+	{
+		trainerServiceImplementation.updateTrainerData(trainer);
+	}
 }

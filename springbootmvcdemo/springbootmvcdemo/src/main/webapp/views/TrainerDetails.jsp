@@ -25,7 +25,7 @@
    <tr>
       <td> <c:out value="${trainer.getTrainerName()}"></c:out> </td>
        <td> <c:out value="${trainer.getTrainerEmail()}"></c:out> </td>
-       <td> <a href="">Update </a>
+       <td> <a href="updateFormPage?trainerid=${trainer.getTrainerId()}">Update </a>
        <td> <a href="deleteTrainer?trainerid=${trainer.getTrainerId()}">Delete</a>
        
    </tr>
